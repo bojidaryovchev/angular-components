@@ -1,0 +1,19 @@
+<div #wrapper class="wrapper" (click)="toggleDropdown($event)">
+  <div class="input-wrapper">
+    <input #input type="text" [disabled]="inputDisabled" (input)="onInput(input)">
+    <div class="label" *ngIf="!input.value">{{ label }}</div>
+    <div class="arrow-wrapper">
+      <span class="arrow"></span>
+    </div>
+    <div class="clear-wrapper" *ngIf="input.value" (click)="clear($event)">
+      <span class="clear"><i class="material-icons">close</i></span>
+    </div>
+  </div>
+  <div #dropdown class="dropdown-content">
+    <p *ngIf="typeahead && !input.value && !filteredItems.length">Type to search...</p>
+    <p #pItem *ngFor="let item of filteredItems"
+      (click)="onItemSelected(item, pItem)"
+      [class.selected]="currentlySelectedItem && item[bindProperty] === currentlySelectedItem[bindProperty]"
+      [innerHTML]="item[bindProperty]"></p>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="pages-wrapper">
+  <div class="page-wrapper" (click)="navigateToStart()">
+    <mat-icon>first_page</mat-icon>
+  </div>
+  <div class="page-wrapper"
+    *ngFor="let page of pages"
+    (click)="navigate(page)"
+    [class.selected]="currentPage === page">{{page}}</div>
+  <div class="page-wrapper" (click)="navigateToEnd()">
+    <mat-icon>last_page</mat-icon>
+  </div>
+</div>
