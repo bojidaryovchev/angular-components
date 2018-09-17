@@ -60,14 +60,7 @@ export class SearchDropdownComponent implements OnInit {
       const selectedItem = this.items.find(i => i[this.bindValue] === this.bindItem[this.bindValue]);
       
       if (selectedItem) {
-        const paragraphs: HTMLParagraphElement[] = Array.from(
-          document.querySelectorAll('.dropdown-content > p')
-        );
-
         this.currentlySelectedItem = selectedItem;
-        this.currentlySelectedParagraphItem = paragraphs.find(
-          p => p.innerText === selectedItem[this.bindProperty]
-        );
         this.input.nativeElement.value = selectedItem[this.bindProperty];
       }
     }
@@ -86,6 +79,20 @@ export class SearchDropdownComponent implements OnInit {
           }
         }
       })
+    );
+  }
+  
+  ngAfterViewInit() {
+    if (!this.currentlySelectedItem) {
+      return;
+    }
+
+    const paragraphs: HTMLParagraphElement[] = Array.from(
+      document.querySelectorAll('.dropdown-content > p')
+    );
+
+    this.currentlySelectedParagraphItem = paragraphs.find(
+      p => p.innerText === this.currentlySelectedItem[this.bindProperty]
     );
   }
 
